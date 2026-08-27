@@ -1,13 +1,8 @@
 # Recreating the Masters of Interactive Light
 
-_This project is to be done in teams of 2._
+**COLLABORATORS:** Neeha Ravula (nr485), Marisol Park (mp2365)
 
-**NAME OF BOTH COLLABORATOR(S) HERE**
-Neeha Ravula (nr485)
-Marisol Park (mp2365)
-
-**THE MASTERWORK YOU DREW FROM THE HAT:**
-Timex Indiglo (1992)
+**THE MASTERWORK YOU DREW FROM THE HAT:** Timex Indiglo (1992)
 
 ---
 
