@@ -17,7 +17,7 @@ TBA
 For your masterwork, reconstruct the interaction as a scene:
 
 - **Setting:** In a dark room or the pitch-black night.
-- **Players:** Ben 10 (played by Marisol); someone screaming for help outside while a villain threatens them; a hidden wizard operating the light (Neeha)
+- **Players:** Ben 10 (the hero); someone screaming for help outside while a villain threatens them; a hidden wizard operating the light
 - **Activity:** Ben 10 is awoken by his watch flashing an alert that a villain is nearby. He hears screams from the street below through his bedroom window, and decides 'it's hero time.' He twists the crown of his watch to select the best alien hero form he can transform into to defeat the villain. Once he makes a decision, he slams his watch and turns into the alien hero.
 - **Goals:** The people in danger want to survive, while the villain outside wants to cause them harm. Ben 10 wants to save the innocent people by defeating the villain by transforming into the alien form he selected on his watch. The hidden wizard wants the light to feel alive and in sync with Ben 10's actions.
 
