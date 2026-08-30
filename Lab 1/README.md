@@ -59,17 +59,17 @@ One of us hid off-camera as the wizard, watching Ben 10's actions and using the 
 
 See our first wizarded attempt here: https://www.youtube.com/watch?v=42269kgHxoI
 
-## Part E. (optional) Costume the Device
+## Part E. Costume the Device
 
-TBA
+We wanted to costume the phone to look more like a watch for a more realistic experience. We used paper and drew a watch, with a cutout for the watch face so that the phone light (our indiglo) can shine through:<br><br>
 
-**Include sketches/photos of what your device might look like here.**
+<img width="3958" height="2969" alt="IMG_6926" src="https://github.com/user-attachments/assets/fff62118-f442-4920-a677-acd2a73b16ba" />
 
-**What concerns or opportunities shaped the way you designed its look?**
+**Concerns/opportunities in shaping the look:** The material has to be transparent enough to let light through the watch face cutout, but opaque enough that the watch band/design is visible. We also tried to use a color scheme of green, gray, and black to fit the Ben 10 universe.
 
 ## Part F. Record
 
-TBA
+Video Sketch: https://www.youtube.com/watch?v=3fDFrM_SdIQ 
 
 **Record your prototyped interaction as a video sketch.** Aim for the bar from
 the top of this lab: a viewer who knows the piece should recognize it; a viewer
@@ -77,9 +77,10 @@ who doesn't should come away understanding what it's famous for. How might you i
 
 **Include your video here.**
 
-**Please indicate who you collaborated with on this lab.** Be generous in
-acknowledging their contributions, and credit any other influences (YouTube,
-Github, Twitter, a friend who lent you a lamp) that informed your recreation.
+**Collaborators and influences:**
+- Marisol Park (Ben 10)
+- Neeha Ravula (Wizard and Person In Danger)
+- Ben 10, the cartoon hero of our childhood
 
 ---
 
