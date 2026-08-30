@@ -6,126 +6,44 @@
 
 ---
 
-One way to understand greatness is to look to the greats. Just as painters learn
-the technique and artistry of the old masters by recreating their paintings, so
-too shall we come to understand computer-mediated interaction by recreating the
-interactive masterworks of our time.
-
-This week, every team will draw a different masterwork from a hat. Some are
-conceptual pieces, some are historical works, some are modern-day products —
-but they all share one thing: **their central mode of interaction is carried by
-light.** Think of Tinker Bell in the original stage production of *Peter Pan*,
-represented by nothing more than a darting circle of light from an off-stage
-mirror. There was no actor playing Tinker Bell; she existed entirely through the
-way the other characters interacted with that light.
-
-Your job is to recreate the *interaction* of the piece you drew — not to build a
-museum-grade replica, but to stage the moment that makes it what it is. Someone
-who knows your piece should watch your recreation and recognize it instantly.
-Someone who has never heard of it should walk away understanding what it is
-famous for.
-
-You will do this using the interaction staging techniques we will use all semester: a
-storyboard, some acting, a phone standing in as a controllable light (the
-*Tinkerbelle* tool), a hidden human "wizard" driving it, a costume, and a
-recorded video.
-
-*Make sure you read all the instructions and understand the whole activity
-before starting!*
-
-## Prep
-
-To start, you will need:
-
-1. Read about Git [here](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F).
-2. Set up your own Github "Lab Hub" by forking the [Interactive-Lab-Hub repository](https://github.com/IRL-CT/Interactive-Lab-Hub). To get lab updates, simply use [GitHub's "Sync fork" button](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) when new content is available.
-
-3. Set up your `README.md` so it has your name and links to this lab. Learn to
-   format a README [here](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-4. **Draw your masterwork from the hat and write it at the top of this file.**
-   Whatever you drew is yours — lean into it.
-
-## Materials
-
-For this lab you will need:
-
-1. Paper, markers/pens, scissors
-2. A smartphone with a browser that can display a webpage (your stand-in "light")
-3. A computer to host the control webpage
-4. Found objects and materials to **costume your phone so it looks like the
-   device in your masterwork** — doll clothes, a paper lantern, a bottle, foil,
-   a cardboard shell, whatever it takes. Be resourceful.
-
-## Deliverables
-
-Submit all of the following in this lab folder of your Lab Hub, as links or
-uploaded files. **Each group member posts their own copy to their own Github repo**, even if the work is
-shared.
-
-1. A short **research write-up** of your masterwork (what it is, when, who made
-   it, and — most importantly — what the interaction is)
-2. **3 iterated storyboards** of the interaction in the masterwork
-5. A **video sketch** of your prototyped interaction
-6. Any **reflections** on the process
-
-Labs are due on Mondays. Make sure this page is linked from your main class hub
-page.
-
----
-
 # The Report
 
 ## Part 0. Know Your Master
 
-Before you prototype anything, get intimately acquainted with the piece you
-drew. Do real research. You are looking less for trivia than for the *shape of
-the interaction*:
-
-- What inputs are available to the user? What responses does the work give?
-- Who is present, and how does the piece color the relationships between them?
-- What is the piece famous for? What are its strengths and its weaknesses?
-
-  Sometimes the details of how the interaction worked are lost in history. Try filling it in with your imagination!
-
-**Describe your masterwork here, in your own words. What is the core interaction
-someone would recognize it by?**
+TBA
 
 ## Part A. Plan
 
 For your masterwork, reconstruct the interaction as a scene:
 
-- **Setting:** Where and when does this interaction happen? (a jungle, a kitchen,
-  a spaceship corridor, a nightclub, a harbor at night)
-- **Players:** Who is involved? Who else is present? Think through everyone in
-  the setting, not just the primary user.
-- **Activity:** What is happening between the players and the light?
-- **Goals:** What is each player trying to do?
+- **Setting:** In a dark room or the pitch-black night.
+- **Players:** Ben 10 (the hero); someone screaming for help outside while a villain threatens them; a hidden wizard operating the light
+- **Activity:** Ben 10 is awoken by his watch flashing an alert that a villain is nearby. He hears screams from the street below through his bedroom window, and decides 'it's hero time.' He twists the crown of his watch to select the best alien hero form he can transform into to defeat the villain. Once he makes a decision, he slams his watch and turns into the alien hero.
+- **Goals:** The people in danger want to survive, while the villain outside wants to cause them harm. Ben 10 wants to save the innocent people by defeating the villain by transforming into the alien form he selected on his watch. The hidden wizard wants the light to feel alive and in sync with Ben 10's actions.
 
-**Describe your setting, players, activity, and goals here.**
+### Storyboards
+**Iteration 1:** A very simple visual of the indiglo interaction. A user in a dark room wants to check the time, so they press the crown of the watch, which then illuminates the watch face and reveals the time.<br><br>
+<img width="2155" height="1666" alt="storyboard_1" src="https://github.com/user-attachments/assets/061b3d1b-7bbb-4a4f-9372-c9dd46a27567" />
 
-Now **sketch a 3 storyboards** of the interaction you are recreating. (The number may depend on the thing you drew, but stretch your thinking!) They
-don't need to be beautiful, but they must capture and communicate not only the behavior of the light, but how it affects
-and the people around it. If you're new to storyboarding, read
-[this explanation](https://www.nngroup.com/articles/storyboards-visualize-ideas/).
 
-**Include pictures of your storyboards here.**
+**Iteration 2**: Marisol and I recalled our childhood obsession with Ben 10, and decided to spruce up the interaction using Ben 10 as the main user.<br><br>
+<img width="2155" height="1666" alt="storyboard_2" src="https://github.com/user-attachments/assets/280bc6b2-d30d-4e30-b372-6eb97d599739" />
 
-Use the storyboards to decide what interaction to prototype.
 
-**Summarize the feedback you got here.**
+**Iteration 3:** After acting out the scene (see Part B) and playing around with the Tinkerbelle tool, we had to redesign the interaction to work around limitations of the tool and satisfy more use cases (ex: alert of danger nearby, choosing an alien form, turning into the alien form).<br><br>
+<img width="2155" height="1666" alt="storyboard_3" src="https://github.com/user-attachments/assets/14c954e1-1c12-4ead-8805-fb97dc526228" />
+
+**TODO: Summarize the feedback you got here.**
 
 ## Part B. Act out the Interaction
 
-Physically act out the interaction you planned. For now, just pretend the light
-is doing what you've scripted — a person can wave a flashlight, or you can narrate
-it aloud.
+When we acted out the sequence, we discovered the following:
+- We noticed that we needed to add a reason/intent for the user to check their watch
+- We decided that we would need to use 2 colors, red and green, to differentiate between the feedback states of the indiglo (red for alerts, green for alien selection)
+- We realized that to visualize the interaction of Ben 10 switching between aliens by turning the crown on his watch, we needed to add more light interaction: light goes from black to green when an alien is selected
+- For recording the interaction, we realized that we need to adjust some of the angles of the scene to ensure the watch face was visible
 
-**Are there things that seemed better on paper than when acted out?**
-
-**Did new ideas about the piece surface once you were on your feet?**
-
-**Are there key moments in the interaction where things could go in a different direction?**
-Iterate your storyboards to capture key non-sequential aspects of the interaction. 
+We used these findings to iterate on our storyboard, resulting in the final storyboard above (Iteration 3).
 
 ## Part C. Prototype the Light (light first!)
 
