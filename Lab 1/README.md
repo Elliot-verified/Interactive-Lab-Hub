@@ -17,7 +17,7 @@ TBA
 For your masterwork, reconstruct the interaction as a scene:
 
 - **Setting:** In a dark room or the pitch-black night.
-- **Players:** Ben 10 (the hero); someone screaming for help outside while a villain threatens them; a hidden wizard operating the light
+- **Players:** Ben 10 (played by Marisol); someone screaming for help outside while a villain threatens them; a hidden wizard operating the light (Neeha)
 - **Activity:** Ben 10 is awoken by his watch flashing an alert that a villain is nearby. He hears screams from the street below through his bedroom window, and decides 'it's hero time.' He twists the crown of his watch to select the best alien hero form he can transform into to defeat the villain. Once he makes a decision, he slams his watch and turns into the alien hero.
 - **Goals:** The people in danger want to survive, while the villain outside wants to cause them harm. Ben 10 wants to save the innocent people by defeating the villain by transforming into the alien form he selected on his watch. The hidden wizard wants the light to feel alive and in sync with Ben 10's actions.
 
@@ -47,44 +47,29 @@ We used these findings to iterate on our storyboard, resulting in the final stor
 
 ## Part C. Prototype the Light (light first!)
 
-Use your smartphone as the light of your device. Open the browser on your phone
-to act as the "light," and use the remote control interface on your computer to
-change that light. Code and setup instructions for the *Tinkerbelle* tool are
-[here](https://github.com/IRL-CT/tinkerbelle) (we invented this tool for
-this lab). If you hit technical trouble, a manually or remotely controlled light
-switch, dimmer, or lamp is a fine substitute.
+**We only focused on light this week; no other modalities.**
 
-**Get the light interaction working before anything else.** Your grade this week
-rides on the *light* being recognizable — the color, the rhythm, the timing, the
-way it answers a person. Only once your light interaction genuinely reads as your
-masterwork should you consider layering in a second modality (sound, vibration,
-motion). If in doubt, keep polishing the light. The other modalities are next
-week's business.
+We used the Tinkerbelle tool, where the phone screen acted as the indiglo light and the laptop controlled its brightness and color. In order to simulate a blinking/flashing effect for the villain alert and alien selection interactions, we used the slider feature to rapidly switch between a black and red/green glow on the phone. We also made sure to time the 'flashing' with the turn of the crown when Ben 10 is looking for an alien on his watch.
+
+**Feedback on Tinkerbelle:** While the slider feature was fast enough for us to simulate a flashing effect, we wished there could've been a built-in blink/flash setting in the tool, where we could also adjust the latency of the blinking (in seconds).
 
 ## Part D. Wizard the Device
 
-Set up a "wizard" arrangement so one person can secretly drive the light while
-another acts with it — this is how you make the device feel alive without
-building any real electronics. (Zoom works well for recording; you can pin the
-video feed of whichever scene you want to capture.)
+One of us hid off-camera as the wizard, watching Ben 10's actions and using the Tinkerbelle controls on the laptop to time the light interactions. We recorded using Zoom.
 
-**Include your first attempts at recording the wizarded set-up here.**
+See our first wizarded attempt here: https://www.youtube.com/watch?v=42269kgHxoI
 
 ## Part E. (optional) Costume the Device
 
-Only now should you worry about what the device looks like. Costume your phone so it reads
-as the object from your masterwork — HAL's eye, a Simon shell, a paper-lantern
-Tinker Bell, an Ambient Orb, a lighthouse, a jack-o'-lantern, whatever you drew.
-
-Think about the world your device lives in: could that environment overheat it?
-Is water a danger? Does it need to be loud and bright for an emergency, or quiet
-and calm for a bedroom?
+TBA
 
 **Include sketches/photos of what your device might look like here.**
 
 **What concerns or opportunities shaped the way you designed its look?**
 
 ## Part F. Record
+
+TBA
 
 **Record your prototyped interaction as a video sketch.** Aim for the bar from
 the top of this lab: a viewer who knows the piece should recognize it; a viewer
