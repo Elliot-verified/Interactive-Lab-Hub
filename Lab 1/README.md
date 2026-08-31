@@ -3,9 +3,11 @@
 _This project is to be done in teams of 2._
 
 **NAME OF BOTH COLLABORATOR(S) HERE**
+Elliot Waxman
+Ghaith Khalil
 
 **THE MASTERWORK YOU DREW FROM THE HAT:**
-
+Project Blinkenlights
 ---
 
 One way to understand greatness is to look to the greats. Just as painters learn
@@ -46,6 +48,7 @@ To start, you will need:
    format a README [here](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 4. **Draw your masterwork from the hat and write it at the top of this file.**
    Whatever you drew is yours — lean into it.
+<img width="496" height="509" alt="image" src="https://github.com/user-attachments/assets/51103303-8f49-4969-9874-6448ef62fb43" />
 
 ## Materials
 
