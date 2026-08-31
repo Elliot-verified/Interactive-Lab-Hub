@@ -95,6 +95,8 @@ the interaction*:
 **Describe your masterwork here, in your own words. What is the core interaction
 someone would recognize it by?**
 
+**Blinkenlights was a piece created by the Chaos Computer Club in honor of their 20th anniversary. It was actually 144 lamps set up behind the windows of a building's upper 8 floors to give the illusion of a screen. Each lamp was switched on and off by a relay from a computer. The core of the interaction with the piece took a few forms.** **People could call a phone number and use their keypad to play pong with another person who called in. They could also submit text or animations to be displayed on the building. In a sense the interaction is not much different from a regular game of pong or texting. However, in another sense it had the novelty of a building displaying the messages or gameplay for a larger audience.** It's almost like playing a video game with a display the size of a building! 
+
 ## Part A. Plan
 
 For your masterwork, reconstruct the interaction as a scene:
@@ -107,6 +109,9 @@ For your masterwork, reconstruct the interaction as a scene:
 - **Goals:** What is each player trying to do?
 
 **Describe your setting, players, activity, and goals here.**
+
+Our recreation could be played by people waiting in a tedious line perhaps. Anyone who goes to the link of our project will be able to display a pixel grid similar to Blinkenlights. Perhaps patrons waiting in a line at a trendy popup restraunt could text a number to display it to others in the line which I think would be fun. Alternatively, they could play a game with another patron in pong and the winner decides whether to switch places in line with the loser. In this game (pong), as it is played typically. A user controls a tiny vertical 'paddle' as a small pixel ball floats across the screen similar to a ping pong ball. Each player is trying to avoid the 'ball' from entering their side of the court and going past the paddle. The players can each alter the direction of the paddle (only vertically) by using the digits on their key pad (after calling the phone number.)
+
 
 Now **sketch a 3 storyboards** of the interaction you are recreating. (The number may depend on the thing you drew, but stretch your thinking!) They
 don't need to be beautiful, but they must capture and communicate not only the behavior of the light, but how it affects
@@ -147,6 +152,7 @@ way it answers a person. Only once your light interaction genuinely reads as you
 masterwork should you consider layering in a second modality (sound, vibration,
 motion). If in doubt, keep polishing the light. The other modalities are next
 week's business.
+
 
 ## Part D. Wizard the Device
 
