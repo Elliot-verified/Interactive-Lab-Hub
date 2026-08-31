@@ -119,7 +119,8 @@ and the people around it. If you're new to storyboarding, read
 [this explanation](https://www.nngroup.com/articles/storyboards-visualize-ideas/).
 
 **Include pictures of your storyboards here.**
-![image](https://hackmd.io/_uploads/SJqDeOM_fe.png)
+<img width="1495" height="657" alt="image" src="https://github.com/user-attachments/assets/77246f65-3524-46d3-8b03-af76874c6e1a" />
+
 
 Use the storyboards to decide what interaction to prototype.
 
