@@ -132,9 +132,10 @@ it was a very cool, engaging interaction
 latency was really good, the visuals updated super fast
 also liked how easy it is to use; you can interact from any phone
 what could have been better:
-
 would be cool if you could make ascii art
 would be fun if you can change colors / customize
+Perhaps make the letters smaller or somehow add 2 lines?
+Or emojis!
 
 ## Part B. Act out the Interaction
 
