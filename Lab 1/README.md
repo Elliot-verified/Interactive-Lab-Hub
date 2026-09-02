@@ -177,20 +177,6 @@ video feed of whichever scene you want to capture.)
 
 **Include your first attempts at recording the wizarded set-up here.**
 
-## Part E. (optional) Costume the Device
-
-Only now should you worry about what the device looks like. Costume your phone so it reads
-as the object from your masterwork — HAL's eye, a Simon shell, a paper-lantern
-Tinker Bell, an Ambient Orb, a lighthouse, a jack-o'-lantern, whatever you drew.
-
-Think about the world your device lives in: could that environment overheat it?
-Is water a danger? Does it need to be loud and bright for an emergency, or quiet
-and calm for a bedroom?
-
-**Include sketches/photos of what your device might look like here.**
-
-**What concerns or opportunities shaped the way you designed its look?**
-
 ## Part F. Record
 
 **Record your prototyped interaction as a video sketch.** Aim for the bar from
