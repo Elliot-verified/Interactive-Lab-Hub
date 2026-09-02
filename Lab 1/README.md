@@ -44,6 +44,8 @@ Before the 90s, there was no simple way to read a watch in the dark. People had 
 
 **TODO: Summarize the feedback you got here.**
 
+This is a very cool project. I like how the green represents that everything is okay; whereas the red light represents danger and urgency. I originally thought this was life alert. Alas, it is Ben 10. 
+
 ## Part B. Act out the Interaction
 
 When we acted out the sequence, we discovered the following:
