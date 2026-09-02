@@ -126,6 +126,16 @@ Use the storyboards to decide what interaction to prototype.
 
 **Summarize the feedback you got here.**
 
+what we liked:
+
+it was a very cool, engaging interaction
+latency was really good, the visuals updated super fast
+also liked how easy it is to use; you can interact from any phone
+what could have been better:
+
+would be cool if you could make ascii art
+would be fun if you can change colors / customize
+
 ## Part B. Act out the Interaction
 
 Physically act out the interaction you planned. For now, just pretend the light
