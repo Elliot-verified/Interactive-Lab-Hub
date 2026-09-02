@@ -136,6 +136,7 @@ would be cool if you could make ascii art
 would be fun if you can change colors / customize
 Perhaps make the letters smaller or somehow add 2 lines?
 Or emojis!
+Very cool application, I can see the relevant factor with your Masterwork. Like the real-time text interaction feed
 
 ## Part B. Act out the Interaction
 
