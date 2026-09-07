@@ -149,8 +149,12 @@ https://youtube.com/shorts/tsh5MOguhmc?feature=share
 **Are there things that seemed better on paper than when acted out?**
 
 **Did new ideas about the piece surface once you were on your feet?**
+People care about seeing it on a larger screen. 
 
 **Are there key moments in the interaction where things could go in a different direction?**
+
+Two people could be having a conversation using the screen as an intermediary. 
+
 Iterate your storyboards to capture key non-sequential aspects of the interaction. 
 
 ## Part C. Prototype the Light (light first!)
@@ -178,6 +182,7 @@ building any real electronics. (Zoom works well for recording; you can pin the
 video feed of whichever scene you want to capture.)
 
 **Include your first attempts at recording the wizarded set-up here.**
+https://youtube.com/shorts/dBhxOuzQtPY?feature=share
 
 ## Part F. Record
 
@@ -207,6 +212,18 @@ wasn't clear.
 **Who were the other groups you kibitzed with? Add links to their project pages here.**
 **Summarize the feedback you got from your partners here.**
 
+what we liked:
+
+it was a very cool, engaging interaction
+latency was really good, the visuals updated super fast
+also liked how easy it is to use; you can interact from any phone
+what could have been better:
+would be cool if you could make ascii art
+would be fun if you can change colors / customize
+Perhaps make the letters smaller or somehow add 2 lines?
+Or emojis!
+Very cool application, I can see the relevant factor with your Masterwork. Like the real-time text interaction feed
+
 ## Remix, Update, or Critique the Master
 
 Now that you understand your masterwork from the inside, respond to it. Do the
@@ -227,6 +244,8 @@ your response engages with what your master was really doing.
 
 **Document everything here — especially the storyboard and video. Photos of the
 prototype are great too.**
+
+https://youtube.com/shorts/dBhxOuzQtPY?feature=share
 
 ---
 
