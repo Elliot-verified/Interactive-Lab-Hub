@@ -1,5 +1,7 @@
 # Interactive Prototyping: The Clock of Pi
 **NAMES OF COLLABORATORS HERE**
+Elliot Waxman
+- I have no collaborators. 
 
 Does it feel like time is moving strangely during this semester?
 
