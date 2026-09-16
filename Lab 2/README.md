@@ -244,6 +244,7 @@ After that, Git will ask you to login to your GitHub account to push the updates
 Do take advantage of having done the previous iteration to refine and simplify your design.
 
 ** Insert any updates ideas, sketches, [Verplank diagrams](https://ccrma.stanford.edu/courses/250a-fall-2004/IDSketchbok.pdf))!, storyboards for your ideas **
+<img width="1070" height="520" alt="image" src="https://github.com/user-attachments/assets/85306cab-4ff2-4eaf-9047-6edd1491bef1" />
 
 
 \*\*\***Put a copy of your code in your Lab 2 Github repo.**\*\*\*
