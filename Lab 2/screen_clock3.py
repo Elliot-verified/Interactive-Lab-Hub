@@ -1,4 +1,5 @@
 import time
+import random
 import shutil
 import subprocess
 from datetime import datetime
@@ -52,6 +53,30 @@ ZONES = [
     ("Sydney",    "Australia/Sydney"),
 ]
 zone_index = 0
+
+# ---------- Quotes on the passage of time (button B) ----------
+QUOTES = [
+    "Time is the wisest counselor of all. Pericles",
+    "Lost time is never found again. Benjamin Franklin",
+    "It is not that we have a short time to live, but that we waste a lot of it. Seneca",
+    "Time is the most valuable thing a man can spend. Theophrastus",
+    "Time and tide wait for no man. English proverb",
+    "The best time to plant a tree was twenty years ago. The second best time is now. Chinese proverb",
+    "Time flies over us, but leaves its shadow behind. Nathaniel Hawthorne",
+    "Do not squander time, for that is the stuff life is made of. Benjamin Franklin",
+    "Time discovers truth. Seneca",
+    "Time is a river of passing events, and strong is its current. Marcus Aurelius",
+    "Seize the day, trusting as little as possible in tomorrow. Horace",
+    "Time brings all things to pass. Aeschylus",
+    "The two most powerful warriors are patience and time. Leo Tolstoy",
+    "You may delay, but time will not. Benjamin Franklin",
+    "Nothing endures but change. Heraclitus",
+    "Time heals what reason cannot. Seneca",
+    "All that we are is the result of what we have thought. Buddha",
+    "To everything there is a season, and a time to every purpose under heaven. Ecclesiastes",
+    "Better three hours too soon than a minute too late. Shakespeare",
+    "Time is but the stream I go a-fishing in. Henry David Thoreau",
+]
 
 # ---------- Fonts ----------
 FONT_DIR = "/usr/share/fonts/truetype/dejavu/"
@@ -124,8 +149,8 @@ while True:
         speak(city)
         time.sleep(0.15)                # debounce
 
-    if b_pressed:                       # button B: say the time now
-        speak(spoken_time(now, city))
+    if b_pressed:                       # button B: a random quote about time
+        speak(random.choice(QUOTES))
         time.sleep(0.15)
 
     # At the top of each minute: speak the time and flash the face
