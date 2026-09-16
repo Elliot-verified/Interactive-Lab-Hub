@@ -247,7 +247,7 @@ Do take advantage of having done the previous iteration to refine and simplify y
 
 
 \*\*\***Put a copy of your code in your Lab 2 Github repo.**\*\*\*
-It is there. 
+It is there. [screen_clock2.py]([url](https://github.com/Elliot-verified/Interactive-Lab-Hub/blob/Fall2026/Lab%202/screen_clock2.py))
 \*\*\***Take a video of your PiClock.**\*\*\*
 <img width="421" height="335" alt="image" src="https://github.com/user-attachments/assets/ad36ccd7-254b-47b1-a166-5ead5ab49130" />
 
