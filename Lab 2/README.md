@@ -215,6 +215,18 @@ One way that we could imagine a clock is to keep track of things that matter to 
 2. Look at and give feedback on the Part E. for at least 3 other people in the class and get 3 people to comment on your Part E!)
 **Put the feedback for your ideas here.**
 
+rc2239
+Video instead of image  xx373
+Make it funnier maybe
+
+LTK38
+Change picture every minute so that It looks like I’m growing older. 
+
+Yw2895
+More interactive
+
+
+
 ## Update your Lab Hub
 
 [Update your Lab Hub](pull_updates/README.md) to get the latest content and requirements for Part 2.
