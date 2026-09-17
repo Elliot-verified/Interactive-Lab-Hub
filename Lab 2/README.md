@@ -240,6 +240,7 @@ Start small, pick just one element of your overall idea, just to show you have a
 ## Make a short video of your modified barebones PiClock
 
 \*\*\***Take a video of your barely modified PiClock.**\*\*\*
+https://youtube.com/shorts/o9frSwyyneo?is=tpd-Nd9-dPdS-GJz
 
 After you edit and work on the scripts for Lab 2, the files should be upload back to your own GitHub repo! You can push to your personal github repo by adding the files here, commiting and pushing.
 
@@ -262,6 +263,8 @@ Do take advantage of having done the previous iteration to refine and simplify y
 \*\*\***Put a copy of your code in your Lab 2 Github repo.**\*\*\*
 It is there. [screen_clock2.py]([url](https://github.com/Elliot-verified/Interactive-Lab-Hub/blob/Fall2026/Lab%202/screen_clock2.py))
 \*\*\***Take a video of your PiClock.**\*\*\*
+
+https://youtube.com/shorts/Mw4_wlmthoc?is=p24RfPwCHkFLxtPk
 <img width="421" height="335" alt="image" src="https://github.com/user-attachments/assets/ad36ccd7-254b-47b1-a166-5ead5ab49130" />
 
 
