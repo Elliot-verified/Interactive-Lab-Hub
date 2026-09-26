@@ -120,12 +120,15 @@ https://youtube.com/shorts/dBhxOuzQtPY?feature=share
 the top of this lab: a viewer who knows the piece should recognize it; a viewer
 who doesn't should come away understanding what it's famous for. How might you illustrate the non-sequential aspects of the interaction in the sketch?
 
+There were not too many non-sequential actions to account for, so we did not run into difficulty with this. 
+
+
 **Include your video here.**
 https://youtube.com/shorts/RPhKJcqeU8U?feature=share
 **Please indicate who you collaborated with on this lab.** Be generous in
 acknowledging their contributions, and credit any other influences (YouTube,
 Github, Twitter, a friend who lent you a lamp) that informed your recreation.
-
+We appreciated the collaboration from our classmates who helped test our working product. 
 ---
 
 # Part 2 — ReMastering the light
