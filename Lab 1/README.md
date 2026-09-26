@@ -76,6 +76,7 @@ it aloud.
 https://youtube.com/shorts/tsh5MOguhmc?feature=share
 
 **Are there things that seemed better on paper than when acted out?**
+Getting people to actually use the number that was provided was the difficult bottleneck that we didn't anticipate. It would've been nice to have it as a QR code or otherwise more accessible. 
 
 **Did new ideas about the piece surface once you were on your feet?**
 People care about seeing it on a larger screen. 
