@@ -1,0 +1,5 @@
+time,question,attempt,model,min_silence,transcript,digits,asr_seconds,confirmed,audio
+2026-09-30T18:15:02,What is your zip code?,1,tiny.en,0.8,1 1 2 0 6,11206,0.89,yes,20260930-181456-attempt1.wav
+2026-09-30T18:16:01,What's your phone number?,1,base.en,0.8,718-421-8346,7184218346,1.92,yes,20260930-181550-attempt1.wav
+2026-09-30T18:16:35,How many pets do you have?,1,tiny.en,0.8,I don't have any.,,0.89,,20260930-181629-attempt1.wav
+2026-09-30T18:16:42,How many pets do you have?,2,tiny.en,0.8,Zero.,0,0.8,yes,20260930-181629-attempt2.wav
