@@ -42,7 +42,11 @@ import sounddevice as sd
 from faster_whisper import WhisperModel
 from piper import PiperVoice
 
+from datetime import datetime
+
 from echo_bot import DEFAULT_VAD, DEFAULT_VOICE, SAMPLE_RATE
+
+TRANSCRIPT_DIR = Path(__file__).resolve().parent / "transcripts"
 
 # The display stack is optional so this still runs as a pure voice device on a
 # machine without the screen (or while you are developing off the Pi).
@@ -269,6 +273,28 @@ class Mouth:
         self.display.set(WaveDisplay.IDLE, 0.0)
 
 
+class Transcript:
+    """Appends the spoken conversation to a timestamped text file as it happens."""
+
+    def __init__(self, directory: str, model: str) -> None:
+        self.dir = Path(directory).expanduser()
+        self.dir.mkdir(parents=True, exist_ok=True)
+        stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+        self.path = self.dir / f"session-{stamp}.txt"
+        self.file = open(self.path, "w", encoding="utf-8")
+        self.file.write(f"# Thinking partner session {datetime.now().isoformat(timespec='seconds')}\n")
+        self.file.write(f"# model: {model}\n\n")
+        self.file.flush()
+
+    def write(self, speaker: str, text: str) -> None:
+        # Flush every line so a Ctrl-C still leaves a complete transcript.
+        self.file.write(f"{speaker}: {text}\n")
+        self.file.flush()
+
+    def close(self) -> None:
+        self.file.close()
+
+
 def main() -> None:
     # The Pi's console may be a latin-1/C locale; Claude's replies contain
     # characters like the em dash. Force UTF-8 so printing never crashes.
@@ -294,6 +320,10 @@ def main() -> None:
                         help="how strongly the waveform reacts to volume (default: 18)")
     parser.add_argument("--no-display", action="store_true",
                         help="run as a voice-only device, no screen")
+    parser.add_argument("--log", nargs="?", const=str(TRANSCRIPT_DIR), default=None,
+                        metavar="DIR",
+                        help="save a timestamped transcript. Bare --log writes to "
+                             f"{TRANSCRIPT_DIR.name}/; --log DIR writes there instead.")
     args = parser.parse_args()
 
     if not os.environ.get("ANTHROPIC_API_KEY"):
@@ -316,6 +346,10 @@ def main() -> None:
     mouth = Mouth(args.voice, display, args.gain)
     client = anthropic.Anthropic()
 
+    transcript = Transcript(args.log, args.claude_model) if args.log else None
+    if transcript:
+        print(f"Logging transcript to {transcript.path}")
+
     history: list[dict] = []
 
     mouth.say("I'm here. What's on your mind?")
@@ -325,6 +359,8 @@ def main() -> None:
         while True:
             heard = ear.listen()
             print(f"  you:  {heard}")
+            if transcript:
+                transcript.write("you", heard)
             history.append({"role": "user", "content": heard})
 
             display.set(WaveDisplay.THINKING)
@@ -341,11 +377,15 @@ def main() -> None:
             history.append({"role": "assistant", "content": reply})
 
             print(f"  it:   {reply}\n")
+            if transcript:
+                transcript.write("it", reply)
             mouth.say(reply)
     except KeyboardInterrupt:
         print("\nTake care.")
     finally:
         display.close()
+        if transcript:
+            transcript.close()
 
 
 if __name__ == "__main__":
