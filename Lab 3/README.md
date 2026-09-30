@@ -167,7 +167,6 @@ At 1.5 seconds of not talking it feels natural to stop. .2 seconds is too quick.
 
 ## D. Storyboard
 
-Storyboard and/or use a Verplank diagram to design a speech-enabled device. (Stuck? Make a device that talks for dogs. If that is too stupid, find an application that is better than that.)
 
 \*\***Post your storyboard and diagram here.**\*\*
 
