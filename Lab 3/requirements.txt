@@ -22,3 +22,12 @@ piper-tts~=1.8
 
 # --- web server for the wizard controller ---
 flask~=3.1
+
+# --- thinking-partner device (speech-scripts/thinking_partner.py) ---
+# Claude API for the dialogue policy:
+anthropic~=1.10
+# MiniPiTFT display + waveform rendering (Pi 5 needs the lgpio GPIO backend):
+pillow~=12.3
+adafruit-blinka~=9.2
+adafruit-circuitpython-rgb-display~=3.14
+lgpio~=0.2.2
