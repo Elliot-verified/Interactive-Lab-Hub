@@ -1,1 +1,1 @@
-echo "I too can make the pi say anything!!" | festival --tts
+echo "Hello Elliot!" | festival --tts
