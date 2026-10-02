@@ -111,6 +111,8 @@ The demo script also shows `--output-raw`, which streams audio to the speaker as
 
 \*\***Then answer: Is the same greeting, in these different voices, the same greeting? Describe one concrete way the voice changed what the utterance seemed to mean or who seemed to be speaking.**\*\*
 
+It's the same words, but not quite the same greeting. `festival` is clearly more human-sounding than `espeak` — compared to the robotic formant voice, it at least has intonation — and Piper is the closest to an actual person. That changes *who* seems to be speaking: the same greeting from `espeak` sounds like a machine announcing itself, while from Piper it sounds like a person actually greeting you, which turns it from a notification into a greeting.
+
 ## B. Speech to Text
 
 We use [faster-whisper](https://github.com/SYSTRAN/faster-whisper), a reimplementation of OpenAI's Whisper model that runs several times faster on CPU and does not require PyTorch. All processing happens on the Pi; nothing is sent to a server.
@@ -131,6 +133,16 @@ Available sizes, smallest first: `tiny.en`, `base.en`, `small.en`, `medium.en`. 
 
 \*\***Record a few seconds of your own speech (`arecord -d 5 -f cd -c 1 -r 16000 test.wav`) and transcribe it with at least two model sizes. Report the real-time factor for each. At what point does the accuracy improvement stop being worth the delay, for a system that has to answer you?**\*\*
 ![alt text](image.png)
+
+Measured on a 5.0s recording of my own speech on the Pi:
+
+| Model | Transcription time | Real-time factor |
+|---|---|---|
+| tiny.en  | 0.96s | 0.19× |
+| base.en  | 2.12s | 0.42× |
+| small.en | 5.95s | 1.19× |
+
+For my use case the accuracy gains stop being worth the delay quickly. The transcript feeds into a language model (Claude), which understands the context even when a word or two is transcribed wrong, so I don't actually need highly accurate transcription — a smaller, faster model is good enough. `tiny.en` and `base.en` both keep up comfortably (faster than real time), while `small.en` runs at 1.19×, *slower* than real time, which adds latency with no benefit I can use for a device that has to answer me.
 
 
 \*\***Write your own script that verbally asks for a numerical input (a phone number, zipcode, number of pets) and records the answer the respondent provides.**\*\* Numbers are a good stress test — transcription systems make characteristic errors on digit strings, and you will want to know what they are before you design around them.
@@ -174,7 +186,9 @@ Write out what you imagine the dialogue to be. Use cards, post-its, or whatever 
 ![alt text](image-1.png)
 \*\***Please describe and document your process.**\*\*
 
-Your script should include the pauses. Where does your device wait, and for how long? You now know from Part C that this is a parameter you have to choose, not something that happens for free.
+I wanted the ability to talk through a difficult decision with an AI model in a way that helps me think for myself, instead of just handing me advice. I've done this with Claude before, but it never leaves me with an artifact — once the conversation is over, it's gone. So a core requirement of my design was that the transcript has to persist *and* be summarized into the main takeaways. The storyboard is built around that: you speak a problem out loud, the device reflects it back and asks, and at the end you're left with a saved record you can revisit.
+
+The pauses are a deliberate choice. From Part C I learned endpointing is a parameter I have to set, so the device waits a generous beat (`--min-silence 0.9`, longer than the echo bot's default) — thinking out loud has long pauses, and I didn't want to be cut off mid-thought.
 
 ## E. Acting out the dialogue
 
@@ -182,6 +196,7 @@ Find a partner, and *without sharing the script with your partner* try out the d
 
 \*\***Describe if the dialogue seemed different than what you imagined when it was acted out, and how.**\*\*
 
+Yes. When I tested it with another student in the class, they were frustrated that the device tended only to ask more questions instead of offering thoughtful, nuanced input of its own. On paper the pure-questioning approach seemed ideal, but in practice it felt withholding. I edited the system prompt so the device also offers more substantive, nuanced responses, not just a stream of questions.
 
 ---
 
