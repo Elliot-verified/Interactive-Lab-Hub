@@ -3,9 +3,9 @@
 
 You say where you're headed and what vibe you want; it takes a photo from the
 webcam, looks at what you're wearing, and gives spoken feedback -- what's working
-and one or two concrete changes for the occasion. Then you can keep talking:
-ask follow-ups, or say "take another look" after you change something and it
-re-shoots.
+and one or two concrete changes for the occasion. It grabs a fresh frame every
+time you speak, so when you change something and ask again, it's reacting to what
+you're wearing now, not a stale first photo.
 
 This reuses the speech + screen stack from thinking_partner.py (Whisper VAD in,
 Piper out, the reactive waveform on the MiniPiTFT) and adds a webcam frame plus
@@ -50,11 +50,6 @@ items you cannot see.
 - If the photo is too dark or too far, or you cannot see the outfit, say so and \
 ask them to step back into frame or fix the light instead of guessing.
 - Plain spoken language. No lists, no markdown, no emoji."""
-
-# Spoken phrases that mean "shoot a fresh photo" rather than ask about the old one.
-RECAPTURE_CUES = ("look again", "take another", "another look", "new photo",
-                  "new outfit", "changed", "recheck", "check again", "look now")
-
 
 def capture_photo(device: str, width: int) -> bytes:
     """Grab one JPEG frame from the webcam and return its bytes."""
@@ -147,10 +142,13 @@ def main() -> None:
             mouth.say("I couldn't get a picture from the camera. Check that it's plugged in.")
             return None
 
+    # History holds text turns only; the live photo is attached fresh per request
+    # so old frames don't accumulate in context.
     history: list[dict] = []
 
     mouth.say("Where are you headed, and what's the vibe?")
-    print("Ready. Tell me the occasion, then let me look. Ctrl-C to stop.\n")
+    print("Ready. Tell me the occasion; I take a fresh look each time you speak. "
+          "Ctrl-C to stop.\n")
 
     try:
         while True:
@@ -159,28 +157,27 @@ def main() -> None:
             if transcript:
                 transcript.write("you", heard)
 
-            # Shoot a fresh frame on the first turn, or when they ask for a new look.
-            take_new = not history or any(cue in heard.lower() for cue in RECAPTURE_CUES)
-            content: list[dict] = []
-            if take_new:
-                mouth.say("Let me take a look.")
-                photo = shoot()
-                if photo:
-                    content.append(photo)
-            content.append({"type": "text", "text": heard})
-            history.append({"role": "user", "content": content})
+            # Grab a current frame every turn -- this is the "live" part: change
+            # your outfit, speak again, and it critiques what you're wearing now.
+            photo = shoot()
+            user_content: list[dict] = ([photo] if photo else []) + [
+                {"type": "text", "text": heard}
+            ]
 
             display.set(WaveDisplay.THINKING)
             response = client.messages.create(
                 model=args.claude_model,
                 max_tokens=300,
                 system=SYSTEM_PROMPT,
-                messages=history,
+                messages=history + [{"role": "user", "content": user_content}],
                 output_config={"effort": "low"},
             )
             reply = " ".join(b.text for b in response.content if b.type == "text").strip()
             if not reply:
                 reply = "Tell me a bit more about where you're going."
+
+            # Store only text, so the next turn's photo is the only image in context.
+            history.append({"role": "user", "content": heard})
             history.append({"role": "assistant", "content": reply})
 
             print(f"  it:   {reply}\n")
