@@ -211,6 +211,12 @@ For Part 2, you will redesign the interaction with the speech-enabled device usi
 3. Make a new storyboard, diagram and/or script based on these reflections.
 4. (optional) Integrate [input devices](inputs.md) in the system
 
+**My reflections:**
+
+1. *Improvements.* The device hears people well, sees them well, and gives thoughtful commentary. The main thing to improve is responsiveness: it takes too long to reply, and during that wait it's unclear whether it's going to respond at all. A loading state would help — the screen already turns its border purple while thinking, but making that read more clearly as "working on it" is the next step.
+2. *Non-speech cues.* The MiniPiTFT screen is the main non-speech channel. In the stylist it shows a live camera preview (so you can see you're in frame) with a colored border for state: teal while it's listening, purple while it's thinking, orange while it's speaking. The thinking-partner version shows those same states as a reactive waveform whose height follows your voice, so you can see you're being heard. Either way, you know whether it's listening or thinking without it having to tell you.
+3. *New storyboard:* _[add storyboard image for the stylist redesign]_
+
 ## Prototype your system
 
 The system should:
@@ -220,7 +226,11 @@ The system should:
 
 *Document how the system works.*
 
+**The system: a camera stylist.** You tell it where you're going and the vibe; it photographs your outfit from the webcam and speaks feedback — what's working and one or two concrete changes for that occasion — using Claude's vision. It runs on the Raspberry Pi and uses two sensors: the USB microphone (speech in) and the webcam (vision). The pipeline is: Silero VAD decides when my turn ends → faster-whisper transcribes it → the photo plus what I said go to the Claude API with a stylist system prompt → Piper speaks the reply. The screen shows the live camera feed with a state-colored border, and it grabs a fresh frame every turn, so I can change my outfit, speak again, and get feedback on what I'm wearing now. The code and a full walkthrough are in [speech-scripts/outfit_check.py](speech-scripts/outfit_check.py) and [speech-scripts/CODE_OVERVIEW.md](speech-scripts/CODE_OVERVIEW.md).
+
 *Include videos or screencaptures of both the system and the controller.*
+
+_[add video/screencapture of the stylist in use]_
 
 ## Test the system
 
@@ -229,16 +239,20 @@ Try to get at least two people to interact with your system. (Ideally, you would
 Answer the following:
 
 ### What worked well about the system and what didn't?
-\*\**your answer here*\*\*
+
+What worked: the commentary was not generic — it was obvious the device was using the actual details captured from the camera when giving feedback and compliments, which made it feel real rather than canned. What didn't: latency. It takes too long to respond, and during that wait it's unclear whether a reply is even coming. A loading state on the screen would help a lot.
 
 ### What worked well about the controller and what didn't?
-\*\**your answer here*\*\*
+
+My system is autonomous, so the "controller" is the Claude policy — the system prompt that decides what it says. The original prompt made it offer more questions than answers, and people were frustrated by that; it also felt indistinguishable from a regular chat with Claude. So I pivoted the prompt: the tool is now specific, giving thoughtful feedback on fashion choices tuned to the venue you're attending. That made the controller feel purposeful instead of generic.
 
 ### What lessons can you take away from the WoZ interactions for designing a more autonomous version of the system?
-\*\**your answer here*\*\*
+
+The biggest lesson was about sensing over time. In the first version a single photo was taken at the start, so the device couldn't give new feedback when someone stepped back to show their full outfit. I iterated so it captures a fresh frame on every turn (and shows a live preview on the screen), which makes it react to what you're actually wearing now. For a more autonomous version the takeaway is that the device has to keep perceiving throughout the interaction, not just sample once at the beginning.
 
 ### How could you use your system to create a dataset of interaction? What other sensing modalities would make sense to capture?
-\*\**your answer here*\*\*
+
+The system could build a dataset of interactions by tagging each one with the self-reported venue the outfit is for, a picture of the outfit, and the feedback the tool gave. That triplet — context, image, response — is exactly what you'd need to study the interaction or train on it later. Other sensing modalities worth capturing: a distance or motion sensor to detect when someone steps back for a full-length view (and trigger a capture at that moment), and ambient light to flag when the photo conditions are too poor to judge an outfit.
 
 <details>
   <summary><strong>Submission Cleanup Reminder (Click to Expand)</strong></summary>
