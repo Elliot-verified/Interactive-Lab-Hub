@@ -31,3 +31,5 @@ pillow~=12.3
 adafruit-blinka~=9.2
 adafruit-circuitpython-rgb-display~=3.14
 lgpio~=0.2.2
+# live camera preview + webcam capture for outfit_check.py:
+opencv-python-headless~=5.0
