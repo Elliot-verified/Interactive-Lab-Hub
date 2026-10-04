@@ -230,7 +230,7 @@ The system should:
 
 *Include videos or screencaptures of both the system and the controller.*
 
-_[add video/screencapture of the stylist in use]_
+https://youtube.com/shorts/N3zv_aD8Whs?is=c1aUxdiCkcHo1nLn
 
 ## Test the system
 
