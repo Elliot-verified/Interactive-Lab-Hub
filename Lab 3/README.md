@@ -215,7 +215,9 @@ For Part 2, you will redesign the interaction with the speech-enabled device usi
 
 1. *Improvements.* The device hears people well, sees them well, and gives thoughtful commentary. The main thing to improve is responsiveness: it takes too long to reply, and during that wait it's unclear whether it's going to respond at all. A loading state would help — the screen already turns its border purple while thinking, but making that read more clearly as "working on it" is the next step.
 2. *Non-speech cues.* The MiniPiTFT screen is the main non-speech channel. In the stylist it shows a live camera preview (so you can see you're in frame) with a colored border for state: teal while it's listening, purple while it's thinking, orange while it's speaking. The thinking-partner version shows those same states as a reactive waveform whose height follows your voice, so you can see you're being heard. Either way, you know whether it's listening or thinking without it having to tell you.
-3. *New storyboard:* _[add storyboard image for the stylist redesign]_
+3. *New storyboard* for the stylist redesign — pick the venue, scan the outfit, get swap tips (change one piece and rescan):
+
+   ![Stylist storyboard: pick the venue, scan the outfit, get swap tips](stylist_storyboard.png)
 
 ## Prototype your system
 
