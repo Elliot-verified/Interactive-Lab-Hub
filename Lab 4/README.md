@@ -18,7 +18,7 @@
 
 ## Lab Overview
 Team: <canvas group name>  
-Members: Full Name (netid, github-handle), ...  
+Members: Elliot Waxman, EW558
 Clock name: <name>
 
 
@@ -286,16 +286,20 @@ As you develop your Feast Automata concept, consider where the sensor and actuat
 
 **\*\*\*Draw 5 sketches that explore different physical arrangements for your sensing and actuation.\*\*\***
 
-![Five Feast Automata concept sketches](feast_sketches.webp)
+<img width="908" height="512" alt="image" src="https://github.com/user-attachments/assets/00d02dff-79c8-444c-b9a4-8ef5a5c28ac7" />
 
 **\*\*\*What questions do these sketches raise? What do you need to physically prototype to answer them?\*\*\***
 
+I made 5 sketches. Two of the sketches are different plays on the energetic suzan (a motor-powered lazy suzan). The third one is a conversation tracker that reveals which dining participant is talking the most or the least. The fourth idea was a kitchen timer that can account for multiple cooking steps. The final one is a camera enabled meat thermometer that will tell you whether your meat is likely to be cooked. These raise questions of the extent to which novelty and sillyness is welcome in dining experiences. 
+
 **\*\*\*Pick one design to prototype and explain why.\*\*\***
+I decided to pick the energetic suzan because it would be the most fun thing to build. It is silly because no one has thought to themselves (likely) "oh, I wish this lazy suzan was motor-powered". If this were an interpretive art piece, we would say that it is a commentary on the automation-first society, which rejects antiquity without consideration for whether a need truly exists. 
+
 
 Build a cardboard or other low-fidelity physical prototype of your design.
 
 **\*\*\*Document your rough prototype with photos and/or video.\*\*\***
-
+https://youtube.com/shorts/cW6RVNn26EE?is=wfLIyasyHjL_reLD
 ---
 
 ## Part 2
