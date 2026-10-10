@@ -292,7 +292,7 @@ Five concepts I explored:
 
 1. **Energetic Suzan (capacitive base)** — a lazy Susan whose base senses touch/placement with a capacitive sensor.
 2. **Energetic Suzan (rotary-driven)** — the same lazy Susan, but spun by a servo/rotary mechanism to move dishes around the table.
-3. **Eating-progress gauge** — a "Sok 50%" meter with fork & knife that tracks how far through the meal you are / conversation tracker at dinner.
+3. **Conversation tracker** — a dinner-table gauge that listens and shows whether you're taking up too much or too little of the conversation relative to your dining companion, based on how much each person is talking (the "50%" meter is the balance of the conversation).
 4. **Kitchen timer** — a Raspberry Pi juggling several cook timers at once (airfryer 14:31, veggies 5:16, pasta 3:23).
 5. **"Is the meat cooked enough?"** — a meat-doneness checker you point at the food.
 
