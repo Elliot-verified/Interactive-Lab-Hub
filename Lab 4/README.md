@@ -286,6 +286,16 @@ As you develop your Feast Automata concept, consider where the sensor and actuat
 
 **\*\*\*Draw 5 sketches that explore different physical arrangements for your sensing and actuation.\*\*\***
 
+![Five Feast Automata concept sketches](feast_sketches.webp)
+
+Five concepts I explored:
+
+1. **Energetic Suzan (capacitive base)** — a lazy Susan whose base senses touch/placement with a capacitive sensor.
+2. **Energetic Suzan (rotary-driven)** — the same lazy Susan, but spun by a servo/rotary mechanism to move dishes around the table.
+3. **Eating-progress gauge** — a "Sok 50%" meter with fork & knife that tracks how far through the meal you are / conversation tracker at dinner.
+4. **Kitchen timer** — a Raspberry Pi juggling several cook timers at once (airfryer 14:31, veggies 5:16, pasta 3:23).
+5. **"Is the meat cooked enough?"** — a meat-doneness checker you point at the food.
+
 **\*\*\*What questions do these sketches raise? What do you need to physically prototype to answer them?\*\*\***
 
 **\*\*\*Pick one design to prototype and explain why.\*\*\***
