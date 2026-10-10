@@ -288,28 +288,9 @@ As you develop your Feast Automata concept, consider where the sensor and actuat
 
 ![Five Feast Automata concept sketches](feast_sketches.webp)
 
-Five concepts I explored:
-
-1. **Energetic Suzan (capacitive base)** — a lazy Susan whose base senses touch/placement with a capacitive sensor.
-2. **Energetic Suzan (rotary-driven)** — the same lazy Susan, but spun by a servo/rotary mechanism to move dishes around the table.
-3. **Conversation tracker** — a dinner-table gauge that listens and shows whether you're taking up too much or too little of the conversation relative to your dining companion, based on how much each person is talking (the "50%" meter is the balance of the conversation).
-4. **Kitchen timer** — a Raspberry Pi juggling several cook timers at once (airfryer 14:31, veggies 5:16, pasta 3:23).
-5. **"Is the meat cooked enough?"** — a meat-doneness checker you point at the food.
-
 **\*\*\*What questions do these sketches raise? What do you need to physically prototype to answer them?\*\*\***
 
-For the motorized lazy Susan (idea 2), the open questions are mostly mechanical:
-- Does a 9g micro servo have enough torque to turn a turntable with actual dishes on it, or only a near-empty one?
-- A standard servo only sweeps ~180°, but a lazy Susan wants to keep turning — do I need a continuous-rotation servo, gearing, or is a back-and-forth sweep enough to read as "passing the food"?
-- How do I mount the turntable on a low-friction bearing so the servo isn't fighting friction?
-- What drives the motion — the encoder knob (manual), or a sensor (a dish placed, someone reaching)?
-- How fast/far should it turn to feel playful without flinging food?
-
-To answer these I need to build a cardboard turntable on a low-friction pivot, couple it to the servo, and test it with real dishes to measure torque and dial in the motion.
-
 **\*\*\*Pick one design to prototype and explain why.\*\*\***
-
-I picked **idea 2 — the rotary-driven Energetic Suzan.** I already have the rotary encoder driving the servo (`encoder_servo.py`), which is exactly the sensing-to-actuation mechanism this concept needs: the knob (or later a sensor) turns the servo that spins the turntable. It's the most direct path from the hardware I've already got working to a real dining interaction — passing and serving food around the table becomes a motorized, playful motion.
 
 Build a cardboard or other low-fidelity physical prototype of your design.
 
