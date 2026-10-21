@@ -43,8 +43,8 @@ For Part 2, build the Feast Automata interaction you developed in Part D by conn
 - Additional inputs, displays, LEDs, buttons, or other outputs are optional extensions.
 
 **Document your system with:**
-- Code for your sensing + actuation prototype
-- Photos and/or video of the working prototype in action
+- Code for your sensing + actuation prototype: [`encoder_servo.py`](encoder_servo.py)
+- Photos and/or video of the working prototype in action: https://youtube.com/shorts/cW6RVNn26EE?is=wfLIyasyHjL_reLD
 - A simple interaction diagram or sketch showing how sensing and actuation are connected
 - Written reflection: What did you learn about connecting sensing, movement, and physical form? What was fun, surprising, or challenging?
 
