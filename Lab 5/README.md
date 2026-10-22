@@ -2,7 +2,7 @@
 
 **Team:**
 
-**Members:** Full Name (netid, github-handle), ...
+**Members:** ew558
 
 **Project name:**
 
@@ -287,6 +287,18 @@ Use storyboards and/or [Verplank diagrams](https://ccrma.stanford.edu/courses/25
 
 \*\*\***Insert ideas, sketches, Verplank diagrams and storyboards for your night-time interaction here.**\*\*\*
 
+### Design concept
+
+I would like my device to notice whether you are on your phone in the middle of the night, before you go to bed, or when you wake up. It would also be nice if it could use pose estimation for this task and see whether you have made progress in your sleep based on how your pose changes at night. The device should tell you how much you moved in the middle of the night, whether you got to bed on time, when you put your phone away, and your longest still period. You should be able to turn it on by pressing a button. It should stay plugged in and turn on the camera around your bedtime. The camera should be placed next to the bed so that you are in full view. The device should save images and timestamps during development, but once it is in production, it should not save any images. In the morning, the device should tell you the weather, how you slept, and remind you of anything you wanted to be reminded of. It should present this information both aloud and on a screen. Before bed, when it can see you lying down within an hour of the bedtime you set, it should ask whether you want to be reminded of anything in the morning. It should recognize that you are awake when the light turns on or your pose changes. It should also have a set wake-up time and wake you at the designated time to help you maintain consistency in your sleep schedule.
+
+### Sleep Routine Assistant storyboard
+
+1. **Before bed:** The user sets a target bedtime and wake-up time, then presses a button to arm the device. The device stays plugged in beside the bed and turns on its camera around the target bedtime. If pose estimation detects the user lying down within one hour of that time, the device asks whether they want to save any reminders for the morning.
+2. **While asleep:** A bedside camera keeps the user in full view. Object detection records when the user's phone is visible and when it is put away, while pose estimation records changes in sleeping position. The system uses these observations to estimate whether the user went to bed on time, how much they moved, and their longest still period. These are observations about movement and routine, not a medical measurement of sleep quality.
+3. **When awake:** The device uses the set wake-up time to avoid mistaking an overnight movement or light change for waking up. At the designated time it acts as an alarm and presents a spoken and on-screen report containing the weather, saved reminders, phone put-away time, overnight movement, and longest still period. This is intended to encourage a more consistent sleep schedule.
+
+During development, the system will save test images with timestamps so that its detections can be checked. In the finished version, it will protect privacy by saving only derived events and timestamps, not images or video.
+
 ## Prep for Part 2
 
 1. Look at and give feedback on the Part F storyboards.
@@ -304,6 +316,8 @@ The hand-off: the person tells the device what to watch tonight, and the device 
 
 \*\*\***Describe the interaction before.**\*\*\*
 
+The user presses a physical button to arm the device and provides a target bedtime and wake-up time. The device acknowledges that monitoring is scheduled and waits until around bedtime to activate the bedside camera. When the user is detected lying down within one hour of the target bedtime, it asks whether there is anything they want to be reminded of in the morning. The device then monitors when the phone is put away and treats that event as one signal that the bedtime routine has ended.
+
 ## Part H. 
 ### Incorporate the observant system
 
@@ -318,6 +332,8 @@ Fake a night first: run it for thirty seconds while you walk around, stop it, an
 
 \*\*\***Screenshots or videos of the running system.**\*\*\*
 
+The observant system will combine object detection for the phone with pose estimation for the user's body. Instead of continuously recording video, it will sample periodically and log changes such as `phone visible`, `phone put away`, `pose changed`, and `still`. These timestamps can be used to calculate the amount of movement and the longest still period. Development mode will temporarily retain images for debugging; production mode will retain only the event log.
+
 ## Part I. 
 ### Design the interaction after
 
@@ -328,6 +344,8 @@ The reveal. The night produced a log; the morning turns it into something a half
 ```
 
 Make it yours: show the report on the Mini PiTFT, read it aloud with Piper from Lab 3, plot the night as a timeline, or ask for JSON (`--json`, Part D) and move a servo. Whatever you pick, make sure it is honest about a night in which nothing happened.
+
+At the designated wake-up time, the device will act as an alarm. A light change or a change in pose can confirm that the user is awake, but cannot trigger the report before the scheduled time. The device will show the report on a screen and speak it aloud. It will give the current weather, repeat any reminders collected before bed, report whether the phone was put away by the target bedtime, summarize overnight movement, and identify the longest still period. If nothing notable happened, it will say so rather than inventing an event or claiming that the user slept well.
 
 ## Final documentation
 
