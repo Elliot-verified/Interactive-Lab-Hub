@@ -334,6 +334,32 @@ Fake a night first: run it for thirty seconds while you walk around, stop it, an
 
 The observant system will combine object detection for the phone with pose estimation for the user's body. Instead of continuously recording video, it will sample periodically and log changes such as `phone visible`, `phone put away`, `pose changed`, and `still`. These timestamps can be used to calculate the amount of movement and the longest still period. Development mode will temporarily retain images for debugging; production mode will retain only the event log.
 
+### Sleep assistant prototype
+
+The first working prototype is in `sleep_assistant.py`. Edit `sleep_config.json` to set the bedtime, wake time, privacy mode, button, display, voice, and location. Run a short supervised test before attempting a night:
+
+```bash
+python sleep_assistant.py --arm-now --start-now --max-samples 20 --report-after
+```
+
+The test detects people and phones with YOLO, estimates a body pose with MediaPipe, records brightness and normalized pose movement, and writes derived observations to `night_log.jsonl`. It then calculates bedtime, phone put-away time, larger pose changes, and the longest still period. These are observations about visible routine and movement, not measurements of sleep stages or sleep quality.
+
+For the physical build, install the optional drivers with `pip install sparkfun-qwiic-button adafruit-circuitpython-ssd1306 Pillow`, then set `"button": "qwiic"` and `"display": "oled"` after connecting the Qwiic button and 128x32 SSD1306 display. Set `piper_model` to the local Piper `.onnx` voice path for spoken prompts and reports. The console remains a fallback while hardware is disconnected.
+
+During calibration, leave `"development_mode": true`; a timestamped frame is saved periodically in `sleep_debug/` so false detections can be checked. Before an unsupervised or real bedroom run, delete those test frames and set `"development_mode": false`. Production mode never calls `imwrite` and the JSONL log contains only timestamps, booleans, brightness, and movement scores.
+
+After calibration, arm the scheduled run with:
+
+```bash
+python sleep_assistant.py
+```
+
+To regenerate the morning report without running the camera:
+
+```bash
+python sleep_assistant.py --report night_log.jsonl
+```
+
 ## Part I. 
 ### Design the interaction after
 

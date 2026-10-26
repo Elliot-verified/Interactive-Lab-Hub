@@ -1,0 +1,33 @@
+{
+  "bedtime": "23:00",
+  "wake_time": "07:00",
+  "pre_bed_minutes": 60,
+  "sample_interval_seconds": 5,
+  "camera": 0,
+  "frame_width": 640,
+  "frame_height": 480,
+  "image_size": 320,
+  "yolo_model": "yolo26n_ncnn_model",
+  "object_confidence": 0.35,
+  "pose_confidence": 0.5,
+  "movement_threshold": 0.12,
+  "awake_motion_threshold": 0.3,
+  "wake_detection_minutes": 60,
+  "brightness_baseline_samples": 12,
+  "light_change_threshold": 25,
+  "development_mode": true,
+  "debug_image_every_samples": 12,
+  "image_directory": "sleep_debug",
+  "log_file": "night_log.jsonl",
+  "report_file": "morning_report.txt",
+  "button": "keyboard",
+  "qwiic_address": 111,
+  "display": "console",
+  "piper_model": null,
+  "reminder_input": "terminal",
+  "location": {
+    "latitude": 40.7128,
+    "longitude": -74.006,
+    "temperature_unit": "fahrenheit"
+  }
+}
