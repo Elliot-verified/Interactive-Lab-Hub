@@ -4,6 +4,8 @@
 
 Our project is a push-to-talk walkie-talkie made from three or more Raspberry Pis. Holding a Qwiic button requests the shared speaking channel. Once it is granted, audio from that Pi's USB microphone is broadcast through the course MQTT broker and played by the speakers on the other Pis. Releasing the button ends the transmission. A coordinator prevents multiple people from speaking at once.
 
+See [WALKIE_TALKIE_INSTRUCTIONS.md](WALKIE_TALKIE_INSTRUCTIONS.md) for the team setup and operating guide.
+
 ---
 
 ## Prep
