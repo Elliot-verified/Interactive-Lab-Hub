@@ -20,6 +20,7 @@ lgpio>=0.2.2.0
 
 # MQTT Communication
 paho-mqtt<2.0
+sparkfun-qwiic-button>=2.0.0
 
 # Image Processing (for display)
 Pillow>=10.0.0

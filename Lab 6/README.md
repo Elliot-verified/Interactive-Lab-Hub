@@ -1,8 +1,8 @@
-# Distributed Interaction
+# Distributed Interaction: MQTT Walkie-Talkie
 
-**NAMES OF COLLABORATORS HERE**
+**Collaborators:** Add all team members here
 
-For submission, replace this section with your documentation!
+Our project is a push-to-talk walkie-talkie made from three or more Raspberry Pis. Holding a Qwiic button requests the shared speaking channel. Once it is granted, audio from that Pi's USB microphone is broadcast through the course MQTT broker and played by the speakers on the other Pis. Releasing the button ends the transmission. A coordinator prevents multiple people from speaking at once.
 
 ---
 
@@ -130,6 +130,143 @@ Hold colored objects near sensor to change your pixel!
 ---
 
 ## Part C: Make Your Own
+
+## Team Project: MQTT Walkie-Talkie
+
+### Project description
+
+Each participant has a Raspberry Pi, Qwiic button, USB microphone, and speaker. The interaction follows the familiar walkie-talkie model: hold the button, wait for the bright LED that confirms the channel is yours, speak, and release the button. Other devices play the live audio. If someone else already has the channel, the LED remains dim and the terminal identifies the active speaker.
+
+The Qwiic button is each Pi's sensor input. Its press and release events travel through MQTT, satisfying the distributed sensor requirement. The same broker carries low-bandwidth audio so the Pis can communicate even when they are on different networks.
+
+### Architecture
+
+```mermaid
+flowchart LR
+    Button1[Qwiic button] --> Client1[Pi walkie client]
+    Mic1[USB microphone] --> Client1
+    Client1 --> Speaker1[USB speaker]
+    Client1 <-->|"control and audio topics"| Broker[Course MQTT broker]
+    Client2[Other Pi clients] <-->|"control and audio topics"| Broker
+    Coordinator[Coordinator on one Pi] <-->|"requests, grants, releases"| Broker
+```
+
+One Pi runs both its normal walkie client and the coordinator in separate processes. The coordinator grants the floor to the first requester for at most 30 seconds. It publishes an idle state after a release, timeout, or speaker disconnect. Audio is 16 kHz, mono, signed 16-bit PCM divided into 40 ms packets. Receivers reject duplicate, out-of-order, and stale packets and use a bounded jitter queue so latency cannot grow without limit.
+
+### MQTT topics
+
+Change `team_id` in `walkie_config.json` to a short, unique team name. All messages then live under `IDD/<team>/walkie/`:
+
+- `control/request`: button presses requesting permission to speak
+- `control/grant`: retained description of the current speaker and stream
+- `control/release`: button releases that return the channel
+- `control/deny/<device>`: busy response sent to one device
+- `control/coordinator`: retained coordinator availability and heartbeat
+- `presence/<device>`: retained online/offline status, including an MQTT last will
+- `audio/<device>`: non-retained binary PCM packets at QoS 0
+
+JSON control messages use QoS 1 because they must arrive. Audio uses QoS 0 because a late retransmission is worse than losing one short sound packet.
+
+### Hardware
+
+Each station needs:
+
+- Raspberry Pi 5 with network access
+- SparkFun Qwiic Button at the default I2C address `0x6F`
+- USB microphone
+- USB speaker or USB audio adapter with a speaker
+- A suitable Pi 5 power supply
+
+Connect the Qwiic button while the Pi is powered off. After booting, verify that it appears:
+
+```bash
+i2cdetect -y 1
+arecord -l
+aplay -l
+```
+
+If the USB devices are not selected by default, put their ALSA names, such as `plughw:2,0`, in `capture_device` and `playback_device` in `walkie_config.json`.
+
+### Installation
+
+On every Pi:
+
+```bash
+cd ~/Interactive-Lab-Hub/"Lab 6"
+python3 -m venv .venv
+source .venv/bin/activate
+sudo apt-get install -y alsa-utils
+pip install -r requirements-pi.txt
+```
+
+Edit `walkie_config.json` so every Pi has the same `team_id`. Leave `device_id` empty to use each Pi's hostname automatically, or give every Pi a unique name.
+
+First verify local audio before using the network:
+
+```bash
+arecord -D default -d 3 -f S16_LE -r 16000 -c 1 /tmp/walkie-test.wav
+aplay -D default /tmp/walkie-test.wav
+```
+
+### Running the system
+
+On one designated Pi, start the coordinator and leave it running:
+
+```bash
+cd ~/Interactive-Lab-Hub/"Lab 6"
+source .venv/bin/activate
+python walkie_coordinator.py
+```
+
+On every Pi, including the coordinator Pi, open another terminal and start the client:
+
+```bash
+cd ~/Interactive-Lab-Hub/"Lab 6"
+source .venv/bin/activate
+python walkie_talkie.py
+```
+
+For a desk test without the physical button, run `python walkie_talkie.py --keyboard`; each Enter press toggles between pressed and released.
+
+Qwiic LED feedback:
+
+- Off: connected and idle
+- Blinking: requesting the channel
+- Bright: speaking
+- Dim: listening or channel busy
+- Slow blinking: disconnected
+
+Stop each process with Ctrl-C. Run the automated protocol tests with:
+
+```bash
+python -m unittest -v test_walkie_talkie.py
+```
+
+### Failure handling and privacy
+
+The floor has a fixed lease, so a crashed sender cannot hold the channel forever. MQTT last-will messages release a sender that disconnects cleanly from the broker, and the bounded playback queue drops delayed audio rather than playing it several seconds late.
+
+The course MQTT broker is shared and uses an unencrypted connection. Team-specific topics prevent accidental overlap but do not make speech private: another broker user could subscribe to the audio topic. Only test with consenting participants, do not transmit sensitive speech, and do not retain or record audio. A future production version should use an authenticated TLS broker or encrypt audio end to end.
+
+### User-testing plan
+
+Test with at least two people who are not on the team:
+
+1. Give them the assembled devices without explaining the controls and ask what they think the button and LED will do.
+2. Ask them to hold a short conversation from different networks.
+3. Trigger two simultaneous button presses and observe whether the busy feedback is understandable.
+4. Disconnect the active speaker and verify that another participant can speak after recovery.
+5. Ask what surprised them, whether they knew when it was safe to speak, and what feedback they would change.
+
+Add photos or video of the hardware and test here. Record observations and participant comments without recording private audio.
+
+### Reflection prompts
+
+- Did the button and LED communicate the push-to-talk interaction without instructions?
+- How noticeable were network delay and lost packets?
+- Did the central coordinator make turn-taking clearer, and what happened when it stopped?
+- What would improve privacy, audio quality, and fault tolerance?
+- The button sensing and audio capture happen locally; arbitration and distribution happen through MQTT. Was this division understandable to users?
 
 **Requirements:**
 - 3+ people, 3+ Pis
