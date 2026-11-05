@@ -266,6 +266,8 @@ Add photos or video of the hardware and test here. Record observations and parti
 
 Initial multi-device console evidence: [Elliot Pi voice-obfuscation test log](logs/elliot-pi-voice-obfuscation-test.txt). The log shows successful floor requests, speaking grants, listening to multiple teammates, and the coordinator switching voice obfuscation from off to on. The `arecord` interruption messages occur when recording is stopped after the push-to-talk button is released.
 
+Additional console evidence: [Dhanu test log](logs/dhanu-voice-obfuscation-test.txt). The log shows listening to `elliot-pi` and `as4422-pi`, busy responses while another device held the channel, a granted channel, and voice obfuscation switching on.
+
 ### Reflection prompts
 
 - Did the button and LED communicate the push-to-talk interaction without instructions?
