@@ -18,8 +18,9 @@ import paho.mqtt.client as mqtt
 
 from walkie_protocol import (
     AudioPacketFilter,
+    PushToTalkGesture,
     Topics,
-    button_edge,
+    VoiceDistorter,
     json_bytes,
     load_config,
     pack_audio,
@@ -193,7 +194,13 @@ class WalkieTalkie:
         self.floor_lock = threading.Lock()
         self.connected = False
         self.coordinator_seen = 0.0
+        self.coordinator_id: str | None = None
+        self.anonymize_enabled = False
         self.button_pressed = False
+        self.gesture = PushToTalkGesture(
+            hold_seconds=float(config.get("hold_to_talk_ms", 250)) / 1000,
+            double_click_seconds=float(config.get("double_click_ms", 450)) / 1000,
+        )
         self.request_id: str | None = None
         self.status = "disconnected"
         self.stop_event = threading.Event()
@@ -232,6 +239,7 @@ class WalkieTalkie:
                 (self.topics.deny(self.device_id), 1),
                 (self.topics.audio_wildcard, 0),
                 (self.topics.heartbeat, 0),
+                (self.topics.anonymize_state, 1),
             ]
         )
         client.publish(
@@ -259,6 +267,9 @@ class WalkieTalkie:
                 data = parse_json(message.payload)
                 if data.get("online"):
                     self.coordinator_seen = time.monotonic()
+                    self.coordinator_id = data.get("coordinator")
+            elif message.topic == self.topics.anonymize_state:
+                self.handle_anonymize_state(parse_json(message.payload))
             elif message.topic.startswith(f"{self.topics.base}/audio/"):
                 self.handle_audio(message.topic, message.payload)
         except (KeyError, TypeError, ValueError) as exc:
@@ -295,6 +306,11 @@ class WalkieTalkie:
         if data.get("request_id") == self.request_id and self.button_pressed:
             self.status = "busy"
             print(f"[BUSY] {data.get('speaker', 'another device')} is speaking", flush=True)
+
+    def handle_anonymize_state(self, data: dict):
+        self.anonymize_enabled = bool(data.get("enabled", False))
+        state = "ON" if self.anonymize_enabled else "OFF"
+        print(f"[VOICE OBFUSCATION] {state}", flush=True)
 
     def handle_audio(self, topic: str, payload: bytes):
         sender = topic.rsplit("/", 1)[-1]
@@ -369,12 +385,18 @@ class WalkieTalkie:
         ]
         process = subprocess.Popen(command, stdout=subprocess.PIPE, bufsize=0)
         sequence = 0
+        distorter = VoiceDistorter(
+            rate,
+            frequency_hz=float(self.config.get("distortion_frequency_hz", 70)),
+        )
         try:
             assert process.stdout
             while not self.record_stop.is_set() and self.button_pressed:
                 pcm = process.stdout.read(chunk_bytes)
                 if not pcm:
                     break
+                if self.anonymize_enabled:
+                    pcm = distorter.process(pcm)
                 packet = pack_audio(stream_id, sequence, int(time.time() * 1000), pcm)
                 self.client.publish(self.topics.audio(self.device_id), packet, qos=0)
                 sequence += 1
@@ -394,24 +416,34 @@ class WalkieTalkie:
 
     def update_button(self):
         pressed = self.button.is_pressed()
-        edge = button_edge(self.button_pressed, pressed)
-        if edge is None:
-            return
         self.button_pressed = pressed
-        if edge == "pressed":
-            if self.connected:
-                self.request_floor()
-            else:
-                self.status = "disconnected"
-        else:
-            with self.floor_lock:
-                own_stream = self.floor.stream_id if self.floor.speaker == self.device_id else None
-            self.stop_recording()
-            if own_stream:
-                self.publish_release(own_stream)
-            self.request_id = None
-            self.status = "idle" if self.connected else "disconnected"
-            print("[IDLE] Button released", flush=True)
+        actions = self.gesture.update(
+            pressed,
+            time.monotonic(),
+            allow_double_click=self.device_id == self.coordinator_id,
+        )
+        for action in actions:
+            if action == "request":
+                if self.connected:
+                    self.request_floor()
+                else:
+                    self.status = "disconnected"
+            elif action == "release":
+                with self.floor_lock:
+                    own_stream = self.floor.stream_id if self.floor.speaker == self.device_id else None
+                self.stop_recording()
+                if own_stream:
+                    self.publish_release(own_stream)
+                self.request_id = None
+                self.status = "idle" if self.connected else "disconnected"
+                print("[IDLE] Button released", flush=True)
+            elif action == "toggle_anonymize":
+                self.client.publish(
+                    self.topics.anonymize_toggle,
+                    json_bytes({"device_id": self.device_id, "at_ms": int(time.time() * 1000)}),
+                    qos=1,
+                )
+                print("[VOICE OBFUSCATION] Toggle requested", flush=True)
 
     def update_led(self):
         phase_rate = 2 if self.status == "disconnected" else 4

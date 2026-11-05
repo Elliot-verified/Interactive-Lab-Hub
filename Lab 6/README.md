@@ -153,7 +153,7 @@ flowchart LR
     Coordinator[Coordinator on one Pi] <-->|"requests, grants, releases"| Broker
 ```
 
-One Pi runs both its normal walkie client and the coordinator in separate processes. The coordinator grants the floor to the first requester for at most 30 seconds. It publishes an idle state after a release, timeout, or speaker disconnect. Audio is 16 kHz, mono, signed 16-bit PCM divided into 40 ms packets. Receivers reject duplicate, out-of-order, and stale packets and use a bounded jitter queue so latency cannot grow without limit.
+One Pi runs both its normal walkie client and the coordinator in separate processes. The coordinator grants the floor to the first requester for at most 30 seconds. It publishes an idle state after a release, timeout, or speaker disconnect. Audio is 16 kHz, mono, signed 16-bit PCM divided into 40 ms packets. Receivers reject duplicate, out-of-order, and stale packets and use a bounded jitter queue so latency cannot grow without limit. A rapid double-click on the coordinator Pi toggles a retained team-wide voice-obfuscation mode; when enabled, every sender applies ring modulation before its audio reaches MQTT.
 
 ### MQTT topics
 
@@ -238,6 +238,8 @@ Qwiic LED feedback:
 - Dim: listening or channel busy
 - Slow blinking: disconnected
 
+Hold the button for at least 250 ms to speak. Quickly double-click the coordinator Pi's button while idle to toggle voice obfuscation for the whole team. Client terminals print the current mode. The robotic effect makes casual recognition harder but is not a guarantee of anonymity.
+
 Stop each process with Ctrl-C. Run the automated protocol tests with:
 
 ```bash
@@ -248,7 +250,7 @@ python -m unittest -v test_walkie_talkie.py
 
 The floor has a fixed lease, so a crashed sender cannot hold the channel forever. MQTT last-will messages release a sender that disconnects cleanly from the broker, and the bounded playback queue drops delayed audio rather than playing it several seconds late.
 
-The course MQTT broker is shared and uses an unencrypted connection. Team-specific topics prevent accidental overlap but do not make speech private: another broker user could subscribe to the audio topic. Only test with consenting participants, do not transmit sensitive speech, and do not retain or record audio. A future production version should use an authenticated TLS broker or encrypt audio end to end.
+The course MQTT broker is shared and uses an unencrypted connection. Team-specific topics prevent accidental overlap but do not make speech private: another broker user could subscribe to the audio topic. Voice obfuscation changes outgoing PCM before it reaches the broker, but it is only an experimental effect and cannot guarantee anonymity against voice analysis. Only test with consenting participants, do not transmit sensitive speech, and do not retain or record audio. A future production version should use an authenticated TLS broker or encrypt audio end to end.
 
 ### User-testing plan
 

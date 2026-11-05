@@ -30,6 +30,7 @@ class Coordinator:
         self.device_id = config["device_id"]
         self.topics = Topics(config["team_id"])
         self.arbiter = FloorArbiter(float(config.get("max_talk_seconds", 30)))
+        self.anonymize_enabled = False
         self.lock = threading.Lock()
         self.stop_event = threading.Event()
         self.client = mqtt.Client(client_id=f"{self.device_id}-walkie-coordinator")
@@ -54,6 +55,7 @@ class Coordinator:
                 (self.topics.request, 1),
                 (self.topics.release, 1),
                 (self.topics.presence_wildcard, 1),
+                (self.topics.anonymize_toggle, 1),
             ]
         )
         client.publish(
@@ -65,6 +67,7 @@ class Coordinator:
         with self.lock:
             state = self.arbiter.current.as_message() if self.arbiter.current else idle_floor_message()
         client.publish(self.topics.grant, json_bytes(state), qos=1, retain=True)
+        self.publish_anonymize_state()
 
     def on_disconnect(self, client, userdata, rc):
         if rc and not self.stop_event.is_set():
@@ -79,6 +82,8 @@ class Coordinator:
                 self.handle_release(data, "released")
             elif message.topic.startswith(f"{self.topics.base}/presence/"):
                 self.handle_presence(data)
+            elif message.topic == self.topics.anonymize_toggle:
+                self.handle_anonymize_toggle(data)
         except (KeyError, TypeError, ValueError) as exc:
             print(f"[WARNING] Ignoring invalid message on {message.topic}: {exc}", flush=True)
 
@@ -125,6 +130,29 @@ class Coordinator:
         self.client.publish(
             self.topics.grant,
             json_bytes(idle_floor_message(reason)),
+            qos=1,
+            retain=True,
+        )
+
+    def handle_anonymize_toggle(self, data: dict):
+        if data.get("device_id") != self.device_id:
+            print("[WARNING] Ignoring anonymize toggle from a non-coordinator device", flush=True)
+            return
+        self.anonymize_enabled = not self.anonymize_enabled
+        self.publish_anonymize_state()
+        state = "ON" if self.anonymize_enabled else "OFF"
+        print(f"[VOICE OBFUSCATION] {state}", flush=True)
+
+    def publish_anonymize_state(self):
+        self.client.publish(
+            self.topics.anonymize_state,
+            json_bytes(
+                {
+                    "enabled": self.anonymize_enabled,
+                    "coordinator": self.device_id,
+                    "at_ms": int(time.time() * 1000),
+                }
+            ),
             qos=1,
             retain=True,
         )

@@ -4,7 +4,9 @@ import uuid
 from walkie_protocol import (
     AudioPacketFilter,
     FloorArbiter,
+    PushToTalkGesture,
     Topics,
+    VoiceDistorter,
     button_edge,
     pack_audio,
     status_brightness,
@@ -48,6 +50,24 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(status_brightness("waiting", 0), 0)
         self.assertEqual(status_brightness("waiting", 1), 100)
         self.assertEqual(status_brightness("listening"), 25)
+
+    def test_hold_talks_but_coordinator_double_click_toggles(self):
+        gesture = PushToTalkGesture(hold_seconds=0.25, double_click_seconds=0.45)
+        self.assertEqual(gesture.update(True, 0.0, True), [])
+        self.assertEqual(gesture.update(True, 0.3, True), ["request"])
+        self.assertEqual(gesture.update(False, 0.4, True), ["release"])
+
+        gesture = PushToTalkGesture(hold_seconds=0.25, double_click_seconds=0.45)
+        gesture.update(True, 1.0, True)
+        self.assertEqual(gesture.update(False, 1.1, True), [])
+        gesture.update(True, 1.2, True)
+        self.assertEqual(gesture.update(False, 1.3, True), ["toggle_anonymize"])
+
+    def test_voice_distortion_changes_pcm_without_changing_packet_size(self):
+        pcm = (b"\x10\x27" * 160)
+        distorted = VoiceDistorter(16000, frequency_hz=70).process(pcm)
+        self.assertEqual(len(distorted), len(pcm))
+        self.assertNotEqual(distorted, pcm)
 
 
 class FloorArbiterTests(unittest.TestCase):

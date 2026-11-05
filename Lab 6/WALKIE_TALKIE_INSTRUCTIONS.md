@@ -113,7 +113,7 @@ In keyboard mode, press Enter once to request the channel and press Enter again 
 ## 7. Use the system
 
 1. Hold the Qwiic button.
-2. Wait until its LED becomes bright, confirming that the channel was granted.
+2. Keep holding for at least a quarter second and wait until its LED becomes bright, confirming that the channel was granted.
 3. Speak into the USB microphone.
 4. Release the button when finished.
 
@@ -127,7 +127,17 @@ LED states:
 
 Only one person can speak at a time. A transmission ends when the button is released, the sender disconnects, or the 30-second limit is reached.
 
-## 8. Run tests
+## 8. Toggle voice obfuscation
+
+The Pi running `walkie_coordinator.py` controls the team-wide voice-obfuscation mode. Quickly double-click that Pi's Qwiic button while it is idle. The coordinator terminal and every client terminal will print whether voice obfuscation is `ON` or `OFF`.
+
+When enabled, every sending Pi applies a robotic ring-modulation effect before publishing its microphone audio. The retained MQTT setting also reaches clients that connect later. Double-click the coordinator button again to turn the effect off.
+
+A quick click is reserved for this gesture, so push-to-talk begins only after the button has been held for 250 ms. Other Pis ignore double-clicks.
+
+This effect makes casual recognition harder, but it does not guarantee anonymity against voice analysis. The MQTT connection is still unencrypted, so continue to avoid private or identifying speech.
+
+## 9. Run tests
 
 ```bash
 cd ~/Interactive-Lab-Hub/"Lab 6"

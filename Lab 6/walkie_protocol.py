@@ -3,10 +3,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from array import array
 import json
+import math
 from pathlib import Path
 import socket
 import struct
+import sys
 import time
 from typing import Any
 import uuid
@@ -56,6 +59,14 @@ class Topics:
     @property
     def heartbeat(self) -> str:
         return f"{self.base}/control/coordinator"
+
+    @property
+    def anonymize_toggle(self) -> str:
+        return f"{self.base}/control/anonymize/toggle"
+
+    @property
+    def anonymize_state(self) -> str:
+        return f"{self.base}/control/anonymize/state"
 
     @property
     def presence_wildcard(self) -> str:
@@ -139,6 +150,64 @@ def button_edge(previous: bool, current: bool) -> str | None:
     if previous == current:
         return None
     return "pressed" if current else "released"
+
+
+class PushToTalkGesture:
+    """Turn a hold into push-to-talk and a coordinator double-click into a toggle."""
+
+    def __init__(self, hold_seconds: float = 0.25, double_click_seconds: float = 0.45):
+        self.hold_seconds = hold_seconds
+        self.double_click_seconds = double_click_seconds
+        self.pressed = False
+        self.talking = False
+        self.press_started = 0.0
+        self.last_quick_release: float | None = None
+
+    def update(self, pressed: bool, now: float, allow_double_click: bool) -> list[str]:
+        actions: list[str] = []
+        if pressed and not self.pressed:
+            self.press_started = now
+        if pressed and not self.talking and now - self.press_started >= self.hold_seconds:
+            self.talking = True
+            self.last_quick_release = None
+            actions.append("request")
+        if not pressed and self.pressed:
+            if self.talking:
+                self.talking = False
+                actions.append("release")
+            elif allow_double_click:
+                if (
+                    self.last_quick_release is not None
+                    and now - self.last_quick_release <= self.double_click_seconds
+                ):
+                    self.last_quick_release = None
+                    actions.append("toggle_anonymize")
+                else:
+                    self.last_quick_release = now
+        self.pressed = pressed
+        return actions
+
+
+class VoiceDistorter:
+    """Apply continuous ring modulation to little-endian signed 16-bit PCM."""
+
+    def __init__(self, sample_rate: int, frequency_hz: float = 70.0):
+        self.phase = 0.0
+        self.phase_step = 2.0 * math.pi * frequency_hz / sample_rate
+
+    def process(self, pcm: bytes) -> bytes:
+        samples = array("h")
+        samples.frombytes(pcm)
+        if sys.byteorder != "little":
+            samples.byteswap()
+        for index, sample in enumerate(samples):
+            carrier = math.sin(self.phase)
+            value = int(sample * carrier * 1.35)
+            samples[index] = max(-32768, min(32767, value))
+            self.phase = (self.phase + self.phase_step) % (2.0 * math.pi)
+        if sys.byteorder != "little":
+            samples.byteswap()
+        return samples.tobytes()
 
 
 def status_brightness(status: str, phase: int = 0) -> int:
