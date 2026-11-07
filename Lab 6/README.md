@@ -195,6 +195,12 @@ aplay -l
 
 If the USB devices are not selected by default, put their ALSA names, such as `plughw:2,0`, in `capture_device` and `playback_device` in `walkie_config.json`.
 
+Our team's build and multi-Pi setup during the lab — each station has a Pi, a Qwiic button, a USB microphone, and a speaker:
+
+![Walkie-talkie build: Pis, Qwiic buttons, mics and speakers](imgs/walkie-build-1.jpg)
+
+![Multiple Pi stations wired up during testing](imgs/walkie-build-2.jpg)
+
 ### Installation
 
 On every Pi:
@@ -277,7 +283,7 @@ We tested with two classmates who were not on the team. We told them it was a wa
 - **First reactions:** They picked up the hold-to-talk model from that one instruction, and were surprised to hear the echo effect on the returning audio.
 - **What they would change:** Most of the feedback was about the physical form. They wanted to be able to pick the device up without the speaker hanging off the side on a wire, and for the button to be contained in the housing instead of dangling on its own wire. They also felt that, while the interaction was novel, it would have been more compelling if the two participants were in different rooms — with the two devices so close together, it was more practical to just talk directly than to use the walkie-talkies.
 
-_[Video of classmates using the walkie-talkie: add link/file]_
+Video of classmates using the walkie-talkie: [clip 1](imgs/walkie-test-1.mp4) · [clip 2](imgs/walkie-test-2.mp4)
 
 Initial multi-device console evidence: [Elliot Pi voice-obfuscation test log](logs/elliot-pi-voice-obfuscation-test.txt). The log shows successful floor requests, speaking grants, listening to multiple teammates, and the coordinator switching voice obfuscation from off to on. The `arecord` interruption messages occur when recording is stopped after the push-to-talk button is released.
 
