@@ -1,6 +1,6 @@
 # Distributed Interaction: MQTT Walkie-Talkie
 
-**Collaborators:** Add all team members here
+**Collaborators:** Elliot Waxman (ew558), Dhanu, as4422
 
 Our project is a push-to-talk walkie-talkie made from three or more Raspberry Pis. Holding a Qwiic button requests the shared speaking channel. Once it is granted, audio from that Pi's USB microphone is broadcast through the course MQTT broker and played by the speakers on the other Pis. Releasing the button ends the transmission. A coordinator prevents multiple people from speaking at once.
 
@@ -60,7 +60,13 @@ mosquitto_pub -h farlab.infosci.cornell.edu -p 1883 -t 'IDD/test/yourname' -m 'H
 
 ![MQTT Explorer showing messages](imgs/MQTT-explorer.png)
 
-**💡 Brainstorm 5 ideas for messaging between devices**
+**💡 Five ideas for messaging between devices**
+
+1. **Directed office intercom** — use the capacitive sensor to pick which of the other Pis you want to contact, for quietly reaching a nearby colleague in an office without getting up or being too loud.
+2. **Whisper down the lane** — each Pi can receive comms from one person and pass comms to one other person, turning the classic telephone game into a networked chain.
+3. **Riddle scavenger hunt** — teammates must collectively solve sensor-based tasks to unlock answers to riddles, a Pi-based cooperative scavenger hunt.
+4. **Collaborative collage** — the messages from multiple Pis combine into a computer-generated visual collage.
+5. **Collaborative song** — the messages from multiple Pis combine into a computer-generated piece of music.
 
 MQTT agrees on almost nothing in advance: you invent the topics and what the messages mean. Smart-home standards like Matter fix the vocabulary instead (every "light" behaves the same). Keep this trade-off in mind when you design your topics in Part C.
 
@@ -264,6 +270,15 @@ Test with at least two people who are not on the team:
 
 Add photos or video of the hardware and test here. Record observations and participant comments without recording private audio.
 
+### User testing results
+
+We tested with two classmates who were not on the team. We told them it was a walkie-talkie and that they needed to hold down the button to talk.
+
+- **First reactions:** They picked up the hold-to-talk model from that one instruction, and were surprised to hear the echo effect on the returning audio.
+- **What they would change:** Most of the feedback was about the physical form. They wanted to be able to pick the device up without the speaker hanging off the side on a wire, and for the button to be contained in the housing instead of dangling on its own wire. They also felt that, while the interaction was novel, it would have been more compelling if the two participants were in different rooms — with the two devices so close together, it was more practical to just talk directly than to use the walkie-talkies.
+
+_[Video of classmates using the walkie-talkie: add link/file]_
+
 Initial multi-device console evidence: [Elliot Pi voice-obfuscation test log](logs/elliot-pi-voice-obfuscation-test.txt). The log shows successful floor requests, speaking grants, listening to multiple teammates, and the coordinator switching voice obfuscation from off to on. The `arecord` interruption messages occur when recording is stopped after the push-to-talk button is released.
 
 Additional console evidence: [Dhanu test log](logs/dhanu-voice-obfuscation-test.txt). The log shows listening to `elliot-pi` and `as4422-pi`, busy responses while another device held the channel, a granted channel, and voice obfuscation switching on.
@@ -275,6 +290,14 @@ Additional console evidence: [Dhanu test log](logs/dhanu-voice-obfuscation-test.
 - Did the central coordinator make turn-taking clearer, and what happened when it stopped?
 - What would improve privacy, audio quality, and fault tolerance?
 - The button sensing and audio capture happen locally; arbitration and distribution happen through MQTT. Was this division understandable to users?
+
+### Reflection
+
+The devices themselves functioned well. The main point of confusion was turn-taking: there was a little lack of clarity about exactly when it was okay to start speaking without talking over the other person.
+
+The system ran with one **coordinator** Pi plus three other Pis communicating with each other. Only the coordinator could toggle "anonymity mode" — a double-press of its button turned everyone's voices into distorted echoes, so other participants could still hear the words but could not identify who was speaking. This centralization was also the system's main weakness: when the coordinator stopped, it stopped working for everyone. If the coordinator had to go offline for any reason, the whole team was cut off.
+
+**Where computation happened:** sensing (button press/release) and audio capture happen locally on each Pi, while arbitration of the speaking floor and distribution of audio happen through the shared MQTT broker and the coordinator. Concentrating the turn-taking decision in one coordinator kept the rule simple and consistent, but made that coordinator a single point of failure — the clearest thing to improve in a more fault-tolerant version.
 
 **Requirements:**
 - 3+ people, 3+ Pis
